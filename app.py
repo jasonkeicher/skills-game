@@ -2,6 +2,11 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 
+# Initialize score counters
+wins = 0
+losses = 0
+ties = 0
+
 def get_computer_choice():
     choices = ["rock", "paper", "scissors"]
     computer_choice = random.choice(choices)
@@ -16,9 +21,17 @@ def determine_winner(user, computer):
         return "Computer wins"
 
 def play(user_choice):
+    global wins, losses, ties
     computer_choice = get_computer_choice()
     result = determine_winner(user_choice, computer_choice)
-    messagebox.showinfo("Result", f"User chose {user_choice}, computer chose {computer_choice}\n{result}")
+    # Update score counters based on result
+    if result == "User wins":
+        wins += 1
+    elif result == "Computer wins":
+        losses += 1
+    else:
+        ties += 1
+    messagebox.showinfo("Result", f"User chose {user_choice}, computer chose {computer_choice}\n{result}\nWins: {wins}, Losses: {losses}, Ties: {ties}")
 
 root = tk.Tk()
 root.title("Rock Paper Scissors")
